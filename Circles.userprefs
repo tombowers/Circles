@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.032d56ca08e79da4" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Circles.Droid/MainActivity.cs">
+    <Files>
+      <File FileName="Circles.Droid/MainActivity.cs" Line="6" Column="6" />
+      <File FileName="Circles.Droid/Custom/CircleView.cs" Line="49" Column="49" />
+      <File FileName="Circles.Droid/Custom/DraggableCircleView.cs" Line="74" Column="74" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Circles.Droid MonoForAntroid.PreferredDevice="Nexus 4" />
+</Properties>

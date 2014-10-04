@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circles", "Circles.csproj", "{815B3A47-C6D0-4D5E-B6EE-288C243D3479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circles.Droid", "Circles.Droid\Circles.Droid.csproj", "{688DC24B-7949-480F-9BAE-258406AC3555}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{688DC24B-7949-480F-9BAE-258406AC3555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688DC24B-7949-480F-9BAE-258406AC3555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688DC24B-7949-480F-9BAE-258406AC3555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688DC24B-7949-480F-9BAE-258406AC3555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815B3A47-C6D0-4D5E-B6EE-288C243D3479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815B3A47-C6D0-4D5E-B6EE-288C243D3479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815B3A47-C6D0-4D5E-B6EE-288C243D3479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815B3A47-C6D0-4D5E-B6EE-288C243D3479}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Circles.Droid\Circles.Droid.csproj
+	EndGlobalSection
+EndGlobal
