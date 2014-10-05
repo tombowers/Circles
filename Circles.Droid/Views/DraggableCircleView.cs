@@ -3,106 +3,125 @@ using Android.Util;
 using Android.Views;
 using System;
 using Android.Widget;
+using Android.Animation;
 
 namespace Circles.Droid
 {
-	public delegate void DoubleTapEventHandler(IDoubleTapAwareView view);
-	public interface IDoubleTapAwareView
-	{
-		event DoubleTapEventHandler DoubleTap;
-		void OnDoubleTap(IDoubleTapAwareView view);
-	}
-
 	public sealed class DraggableCircleView : CircleView, IDoubleTapAwareView
 	{
-		private GestureDetector _touchDetector;
+		private int _radius;
+		private ViewEvents.ITouchHandler _touchHandler;
+
+		private int _xDelta, _yDelta;
+		private bool _dragging;
 
 		public DraggableCircleView(Context context, int radius, int xPosition, int yPosition)
 			: base(context, radius, xPosition, yPosition)
 		{
-			SharedConstruction(context);
+			SharedConstruction(context, radius);
 		}
 
 		public DraggableCircleView(Context context, IAttributeSet attrs)
 			: base(context, attrs)
 		{
-			SharedConstruction(context);
+			SharedConstruction(context, 100);
 		}
 
-		private void SharedConstruction(Context context)
+		private void SharedConstruction(Context context, int radius)
 		{
-			_touchDetector = new GestureDetector(context, new GestureListener(this));
+			_radius = radius;
+
+			// Create custom touch handler to support taps, double taps and drags
+			_touchHandler = new TouchHandler(context, this);
+
+			// Allow other consumers to use single and double click.
+			_touchHandler.SingleTap += (v, e) => PerformClick();
+			_touchHandler.DoubleTap += (v, e) =>
+			{
+				var doubleTap = DoubleTap;
+				if (doubleTap != null)
+					doubleTap(v, e);
+			};
+
+			MakeDraggable();
 		}
 
-		public event DoubleTapEventHandler DoubleTap;
+		#region IDoubleTapAwareView implementation
 
-		public void OnDoubleTap(IDoubleTapAwareView view)
+		public event ViewEvents.DoubleTapEventHandler DoubleTap;
+
+		#endregion
+
+		public override bool DispatchTouchEvent(MotionEvent e)
 		{
-			var doubleTap = DoubleTap;
-			if (doubleTap != null)
-				DoubleTap(view);
-		}
-
-		public override bool OnTouchEvent(MotionEvent e)
-		{
-			BringToFront();
-
-			_touchDetector.OnTouchEvent(e);
+			// Pass touch event to custom touch handler
+			_touchHandler.ReceiveNativeTouchEvent(e);
 
 			// The OnTouchEvent call above returns false even when returning true from all the overridden methods.
 			// There's no occasion in which we wan't the parent to respond to events handled by this view, so returning true here.
 			return true;
 		}
 
-		// Should be moved of here and changed to fire events instead of handling view position directly.
-		private class GestureListener : GestureDetector.SimpleOnGestureListener
+		private void MakeDraggable()
 		{
-			private readonly View _view;
-
-			private int _xDelta, _yDelta;
-
-			public GestureListener(View view)
+			_touchHandler.Down += (v, e) =>
 			{
-				if (view == null)
-					throw new ArgumentNullException("view");
+				BringToFront();
 
-				_view = view;
-			}
+				var lParams = (RelativeLayout.LayoutParams)LayoutParameters;
+				_xDelta = (int)e.TouchX - lParams.LeftMargin;
+				_yDelta = (int)e.TouchY - lParams.TopMargin;
+			};
 
-			public override bool OnDown(MotionEvent e)
+			_touchHandler.Drag += (v, e) =>
 			{
-				var lParams = (RelativeLayout.LayoutParams)_view.LayoutParameters;
-				_xDelta = (int)e.RawX - lParams.LeftMargin;
-				_yDelta = (int)e.RawY - lParams.TopMargin;
+				if (!_dragging)
+				{
+					//Enlarge();
+					_dragging = true;
+				}
 
-				return true;
-			}
+				var layoutParams = (RelativeLayout.LayoutParams)LayoutParameters;
+				layoutParams.LeftMargin = (int)e.TouchX - _xDelta;
+				layoutParams.TopMargin = (int)e.TouchY - _yDelta;
+				LayoutParameters = layoutParams;
+			};
+		}
 
-			public override bool OnSingleTapConfirmed(MotionEvent e)
+		private void Enlarge()
+		{
+			var fromVal = _radius;
+			var toVal = (int)(_radius * 1.5);
+
+			var scaleAnimation = ValueAnimator.OfInt(fromVal, toVal);
+			scaleAnimation.Update += (s, e) =>
 			{
-				_view.PerformClick();
+				var result = (int)e.Animation.AnimatedValue;
 
-				return true;
-			}
+				Console.WriteLine(result);
 
-			public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+				_radius = result;
+				Invalidate();
+			};
+
+			scaleAnimation.Start();
+		}
+
+		private void DeEnlarge()
+		{
+			var fromVal = (int)(_radius * 1.5);
+			var toVal = _radius;
+
+			var scaleAnimation = ValueAnimator.OfInt(fromVal, toVal);
+			scaleAnimation.Update += (s, e) =>
 			{
-				var layoutParams = (RelativeLayout.LayoutParams)_view.LayoutParameters;
-				layoutParams.LeftMargin = (int)e2.RawX - _xDelta;
-				layoutParams.TopMargin = (int)e2.RawY - _yDelta;
-				_view.LayoutParameters = layoutParams;
+				var result = (int)e.Animation.AnimatedValue;
 
-				return true;
-			}
+				_radius = result;
+				Invalidate();
+			};
 
-			public override bool OnDoubleTap(MotionEvent e)
-			{
-				var view = _view as IDoubleTapAwareView;
-				if (view != null)
-					view.OnDoubleTap(view);
-
-				return true;
-			}	
+			scaleAnimation.Start();
 		}
 	}
 }

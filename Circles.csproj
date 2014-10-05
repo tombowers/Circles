@@ -37,6 +37,7 @@
     <Compile Include="Colours\FastLocalRandomColorGenerator.cs" />
     <Compile Include="Models\RandomColourResponse.cs" />
     <Compile Include="Extensions\CustomColorExtensions.cs" />
+    <Compile Include="Models\ViewEvents.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

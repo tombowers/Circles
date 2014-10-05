@@ -58,7 +58,7 @@ namespace Circles.Droid
 				});
 			};
 
-			circle.DoubleTap += v =>
+			circle.DoubleTap += (v, e) =>
 				((DraggableCircleView)v).ToggleTitle();
 
 			_layout.AddView(circle);
