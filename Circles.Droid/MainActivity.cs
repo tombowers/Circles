@@ -63,7 +63,7 @@ namespace Circles.Droid
 
 			_layout.AddView(circle);
 
-			_randomColourGenerator.GetNextAsync(circle.ChangeColour);
+			_randomColourGenerator.GetNextAsync(circle.ChangeColourAnimated);
 		}
 	}
 }
