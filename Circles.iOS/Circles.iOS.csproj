@@ -114,9 +114,9 @@
     <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Circles.csproj">
+    <ProjectReference Include="..\Circles.Core\Circles.Core.csproj">
       <Project>{815B3A47-C6D0-4D5E-B6EE-288C243D3479}</Project>
-      <Name>Circles</Name>
+      <Name>Circles.Core</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

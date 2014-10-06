@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circles", "Circles.csproj", "{815B3A47-C6D0-4D5E-B6EE-288C243D3479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circles.Core", "Circles.Core\Circles.Core.csproj", "{815B3A47-C6D0-4D5E-B6EE-288C243D3479}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circles.Droid", "Circles.Droid\Circles.Droid.csproj", "{688DC24B-7949-480F-9BAE-258406AC3555}"
 EndProject

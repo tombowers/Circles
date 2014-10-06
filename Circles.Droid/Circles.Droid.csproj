@@ -66,14 +66,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Circles.csproj">
-      <Project>{815B3A47-C6D0-4D5E-B6EE-288C243D3479}</Project>
-      <Name>Circles</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Views\" />
     <Folder Include="Custom\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Circles.Core\Circles.Core.csproj">
+      <Project>{815B3A47-C6D0-4D5E-B6EE-288C243D3479}</Project>
+      <Name>Circles.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
