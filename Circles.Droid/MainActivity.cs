@@ -26,7 +26,7 @@ namespace Circles.Droid
 			var size = new Point();
 			WindowManager.DefaultDisplay.GetSize(size);
 
-			_circleSize = size.X / 4;
+			_circleSize = size.X / 6;
 
 			AddCircle(size.X / 2, size.Y / 2);
 		}
