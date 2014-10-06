@@ -21,6 +21,12 @@ namespace Circles
 			event DragEventHandler Drag;
 		}
 
+		public interface ITapAwareView
+		{
+			event SingleTapEventHandler SingleTap;
+			event DoubleTapEventHandler DoubleTap;
+		}
+
 		public class TouchEvent
 		{
 			public TouchEvent(float touchX, float touchY)

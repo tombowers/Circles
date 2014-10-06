@@ -1,8 +1,4 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
+﻿using Android.App;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
@@ -26,8 +22,6 @@ namespace Circles.Droid
 
 			_randomColourGenerator = new ColourLoversRandomColourGenerator(new FastLocalRandomColorGenerator());
 
-			//_layout.Touch += (s, e) => AddCircle();
-
 			var size = new Point();
 			WindowManager.DefaultDisplay.GetSize(size);
 
@@ -46,13 +40,14 @@ namespace Circles.Droid
 		{
 			var circle = new DraggableCircleView(this, 200, xPosition, yPosition);
 
-			circle.Click += (s, e) =>
+			circle.SingleTap += (v, e) =>
 			{
-				var clickedCircle = (DraggableCircleView)s;
+				var clickedCircle = (DraggableCircleView)v;
 				var toast = Toast.MakeText(this, "Finding new colour", ToastLength.Short);
 				toast.Show();
 
-				_randomColourGenerator.GetNextAsync(c => {
+				_randomColourGenerator.GetNextAsync(c =>
+				{
 					clickedCircle.ChangeColourAnimated(c);
 					toast.Cancel();
 				});

@@ -7,7 +7,7 @@ using Android.Animation;
 
 namespace Circles.Droid
 {
-	public sealed class DraggableCircleView : CircleView, IDoubleTapAwareView
+	public sealed class DraggableCircleView : CircleView, ViewEvents.ITapAwareView
 	{
 		private int _radius;
 		private ViewEvents.ITouchHandler _touchHandler;
@@ -35,7 +35,13 @@ namespace Circles.Droid
 			_touchHandler = new TouchHandler(context, this);
 
 			// Allow other consumers to use single and double click.
-			_touchHandler.SingleTap += (v, e) => PerformClick();
+			_touchHandler.SingleTap += (v, e) =>
+			{
+				var singleTap = SingleTap;
+				if (singleTap != null)
+					singleTap(v, e);
+			};
+
 			_touchHandler.DoubleTap += (v, e) =>
 			{
 				var doubleTap = DoubleTap;
@@ -46,8 +52,9 @@ namespace Circles.Droid
 			MakeDraggable();
 		}
 
-		#region IDoubleTapAwareView implementation
+		#region ITapAwareView implementation
 
+		public event ViewEvents.SingleTapEventHandler SingleTap;
 		public event ViewEvents.DoubleTapEventHandler DoubleTap;
 
 		#endregion
