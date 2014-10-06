@@ -44,7 +44,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="Views\CircleView.cs" />
     <Compile Include="Views\DraggableCircleView.cs" />
     <Compile Include="Custom\TouchHandler.cs" />
+    <Compile Include="Controllers\MainActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -69,6 +69,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Views\" />
     <Folder Include="Custom\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Circles.Core\Circles.Core.csproj">
