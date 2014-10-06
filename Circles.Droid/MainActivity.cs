@@ -11,6 +11,7 @@ namespace Circles.Droid
 	{
 		private RelativeLayout _layout;
 		private IRandomColourGenerator _randomColourGenerator;
+		private int _circleSize;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -25,6 +26,8 @@ namespace Circles.Droid
 			var size = new Point();
 			WindowManager.DefaultDisplay.GetSize(size);
 
+			_circleSize = size.X / 4;
+
 			AddCircle(size.X / 2, size.Y / 2);
 		}
 
@@ -38,7 +41,7 @@ namespace Circles.Droid
 
 		private void AddCircle(int xPosition, int yPosition)
 		{
-			var circle = new DraggableCircleView(this, 200, xPosition, yPosition);
+			var circle = new DraggableCircleView(this, _circleSize, xPosition, yPosition);
 
 			circle.SingleTap += (v, e) =>
 			{
